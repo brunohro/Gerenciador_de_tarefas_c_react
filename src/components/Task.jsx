@@ -16,7 +16,7 @@ function Task(props) {
             <ChevronRightIcon />
           </button>
           <button
-            onClick={() => props.onDeleteTaskClick(task.id)}
+            onClick={() => props.onDeleteTaskClick(task.id)} // chamando a minha funcao de deletar
             className="bg-slate-400 text-white p-2 rounded-md"
           >
             <TrashIcon />
