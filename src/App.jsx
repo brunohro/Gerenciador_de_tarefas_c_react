@@ -1,30 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import AddTask from "./components/AddTask";
 import Task from "./components/Task";
 import AddTask from "./components/AddTask";
 import { v4 } from "uuid";
 
 function App() {
-  const [task, setTask] = useState([
-    {
-      id: 1,
-      title: "Teste",
-      description: "testetesteteste",
-      isCompleted: false,
-    },
-    {
-      id: 2,
-      title: "Teste2",
-      description: "testetesteteste2",
-      isCompleted: false,
-    },
-    {
-      id: 3,
-      title: "Teste3",
-      description: "testetesteteste3",
-      isCompleted: false,
-    },
-  ]);
+  const [task, setTask] = useState(
+    JSON.parse(localStorage.getItem("task")) || []
+  );
+
+  useEffect(() => {
+    // essa funcao é executada sempre que meu task for alterado
+    localStorage.setItem("task", JSON.stringify(task));
+  }, [task]);
 
   function onTaskClick(taskId) {
     // funcao para completar tarefa
