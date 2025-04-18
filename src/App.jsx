@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Task from "./components/Task";
 import AddTask from "./components/AddTask";
 import { v4 } from "uuid";
-
+import Title from "./components/Title";
 function App() {
   const [task, setTask] = useState(
     // armazenando meus dados em um localStorage
@@ -15,25 +15,26 @@ function App() {
     localStorage.setItem("task", JSON.stringify(task));
   }, [task]);
 
-  useEffect(() => {
-    const fetchTask = async () => {
-      // chamar a API
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/todos?_limit=10",
-        {
-          method: "GET",
-        }
-      );
+  // SE QUISER CHAMAR UMA API
+  // useEffect(() => {
+  //   const fetchTask = async () => {
+  //     // chamar a API
+  //     const response = await fetch(
+  //       "https://jsonplaceholder.typicode.com/todos?_limit=10",
+  //       {
+  //         method: "GET",
+  //       }
+  //     );
 
-      // PEGAR OS DADOS QUE ELA RETORNA
+  //     // PEGAR OS DADOS QUE ELA RETORNA
 
-      const data = await response.json();
+  //     const data = await response.json();
 
-      // armazenar esses dados no state
-      setTask(data);
-    };
-    fetchTask();
-  }, []);
+  //     // armazenar esses dados no state
+  //     setTask(data);
+  //   };
+  //   fetchTask();
+  // }, []);
 
   function onTaskClick(taskId) {
     // funcao para completar tarefa
@@ -65,9 +66,7 @@ function App() {
   return (
     <div className="w-screen h-screen bg-slate-500 flex justify-center p-6 space-y-4">
       <div className="w-[500px] space-y-4">
-        <h1 className="text-3xl text-slate-100 font-bold text-center">
-          Gerenciador de Tarefas
-        </h1>
+        <Title> Gerenciador de Tarefas </Title>
         <AddTask onAddTaskSubmit={onAddTaskSubmit} />
         <Task
           tasks={task}
