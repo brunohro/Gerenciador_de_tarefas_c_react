@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Input from "./input";
-import Button from "./button";
+import Button from "./Button";
 
 function AddTask({ onAddTaskSubmit }) {
   const [title, setTitle] = useState("");
