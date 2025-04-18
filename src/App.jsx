@@ -6,6 +6,7 @@ import { v4 } from "uuid";
 
 function App() {
   const [task, setTask] = useState(
+    // armazenando meus dados em um localStorage
     JSON.parse(localStorage.getItem("task")) || []
   );
 
@@ -13,6 +14,26 @@ function App() {
     // essa funcao é executada sempre que meu task for alterado
     localStorage.setItem("task", JSON.stringify(task));
   }, [task]);
+
+  useEffect(() => {
+    const fetchTask = async () => {
+      // chamar a API
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/todos?_limit=10",
+        {
+          method: "GET",
+        }
+      );
+
+      // PEGAR OS DADOS QUE ELA RETORNA
+
+      const data = await response.json();
+
+      // armazenar esses dados no state
+      setTask(data);
+    };
+    fetchTask();
+  }, []);
 
   function onTaskClick(taskId) {
     // funcao para completar tarefa
